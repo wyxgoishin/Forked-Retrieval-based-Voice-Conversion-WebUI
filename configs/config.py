@@ -55,8 +55,9 @@ class Config:
             self.listen_port,
             self.iscolab,
             self.noparallel,
-            self.noautoopen,
+            self.no_auto_open,
             self.dml,
+            self.app_timeout,
         ) = self.arg_parse()
         self.instead = ""
         self.preprocess_per = 3.7
@@ -84,7 +85,7 @@ class Config:
             "--noparallel", action="store_true", help="Disable parallel processing"
         )
         parser.add_argument(
-            "--noautoopen",
+            "--no_auto_open",
             action="store_true",
             help="Do not open in browser automatically",
         )
@@ -93,17 +94,20 @@ class Config:
             action="store_true",
             help="torch_dml",
         )
+        parser.add_argument("--app_timeout", type=int, default=30, help="app timeout")
         cmd_opts = parser.parse_args()
 
         cmd_opts.port = cmd_opts.port if 0 <= cmd_opts.port <= 65535 else 7865
+        cmd_opts.app_timeout = 30 if cmd_opts.app_timeout <= 0 else cmd_opts.app_timeout
 
         return (
             cmd_opts.pycmd,
             cmd_opts.port,
             cmd_opts.colab,
             cmd_opts.noparallel,
-            cmd_opts.noautoopen,
+            cmd_opts.no_auto_open,
             cmd_opts.dml,
+            cmd_opts.app_timeout,
         )
 
     # has_mps is only available in nightly pytorch (for now) and MasOS 12.3+.

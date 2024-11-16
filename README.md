@@ -64,11 +64,11 @@
 #### 1. 通过 pip 安装依赖
 1. 安装Pytorch及其核心依赖，若已安装则跳过。参考自: https://pytorch.org/get-started/locally/
 ```bash
-pip install torch torchvision torchaudio
+pip install torch
 ```
 2. 如果是 win 系统 + Nvidia Ampere 架构(RTX30xx)，根据 #21 的经验，需要指定 pytorch 对应的 cuda 版本
 ```bash
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu117
+pip install torch --index-url https://download.pytorch.org/whl/cu117
 ```
 3. 根据自己的显卡安装对应依赖
 - N卡
